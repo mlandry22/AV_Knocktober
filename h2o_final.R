@@ -306,6 +306,15 @@ write.csv(submission,paste0(gbmName,".csv"),row.names=F)
 ###########################################################################
 ###########################################################################
 
+## this function was missing from the original version pushed
+## thanks, @roger
+processFile<-function(fileName){
+  a<-fread(fileName)[order(Outcome)]
+  a[,rk:=.I/nrow(a)]
+  a<-a[order(Patient_ID,Health_Camp_ID)]
+  print(nrow(a))
+  return(a)
+}
 
 
 blendFileLocations<-c("g32-final.csv"
